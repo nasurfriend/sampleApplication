@@ -36,6 +36,9 @@ spec:
         stage('Test') {
             steps {
                sh "echo test"
+
+		sh 'curl -k https://get.helm.sh/helm-v3.7.0-linux-amd64.tar.gz > helm && tar -zxvf helm linux-amd64 && chmod +x ./linux-amd64/helm'
+                sh 'linux-amd64/helm version'
             }
         }
         stage('Pull') {
@@ -65,7 +68,7 @@ spec:
                 }
             }
         }
-		stage('Dockerised') {
+	stage('Dockerised') {
             steps {
 			    echo "application name: ${application_name}"
 				
@@ -77,8 +80,8 @@ spec:
 						echo "Image Ver: ${imgver}"
 						sh "pwd && ls -ltrha "
 						appName="${application_name}".toLowerCase()
-						sh "./oc project jenkins-ephimeral"
-						sh "linux-amd64/helm upgrade --install ${appName} ./helmchart --set tag=${version},namespace=jenkins-ephimeral,applicationName=${appName}"
+						sh "./oc project sandbox-env"
+						sh "linux-amd64/helm upgrade --install ${appName} ./helmchart --set tag=${version},namespace=sanbox-env,applicationName=${appName}"
 						dir("./sampleApplication") {
 							appName="${application_name}".toLowerCase()
 							sh "../../oc start-build ${appName} --from-dir=. --follow --wait"
