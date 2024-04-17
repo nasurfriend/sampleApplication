@@ -1,7 +1,7 @@
 kind: BuildConfig
 apiVersion: build.openshift.io/v1
 metadata:
-  name: samplebuild
+  name: sampleapplication
   namespace: sandbox-env
 spec:
   output:
