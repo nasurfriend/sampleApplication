@@ -7,7 +7,7 @@ This application is a demo spring boot application that consist of GET API call 
 - Jenkins:
   Configure the Cloud settings and set it to your k8s/Ocp.
   Create your service account and linked it with the namespace
-  
+  `oc policy add-role-to-user edit system:serviceaccount:[namespace]:[serviceaccount] -n [namespace]`
   
   Create a pipeline with a scripted pipeline and pull from the repository.
   
@@ -17,4 +17,3 @@ the following is the call sequence
 
 port exposed: `8080`
 
-https://pandao.github.io/editor.md/en.html
