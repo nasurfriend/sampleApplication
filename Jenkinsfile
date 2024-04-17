@@ -54,7 +54,7 @@ spec:
 				
                 sh "git clone --branch master https://github.com/nasurfriend/sampleApplication.git"
 				sh "pwd"
-			    dir('./spring-boot-hello-world') {
+			    dir('./OCP/Builds') {
                    sh """
                        pwd
                        ls -ltr
@@ -80,19 +80,18 @@ spec:
 			    echo "application name: ${application_name}"
 				
 				script {
-					dir("./sampleApplication") {
+					
 						version = sh( script: "mvn org.apache.maven.plugins:maven-help-plugin:2.1.1:evaluate -Dexpression=project.version | sed -n -e '/^\\[.*\\]/ !{ /^[0-9]/ { p; q } }'", returnStdout:true ).trim()
 						imgver = version
-					}
+					
 						echo "Image Ver: ${imgver}"
 						sh "pwd && ls -ltrha "
 						appName="${application_name}".toLowerCase()
 						sh "./oc project sandbox-env"
-						sh "linux-amd64/helm upgrade --install ${appName} ./helmchart --set tag=${version},namespace=sanbox-env,applicationName=${appName}"
-						dir("./sampleApplication") {
-							appName="${application_name}".toLowerCase()
-							sh "../../oc start-build ${appName} --from-dir=. --follow --wait"
-						}
+						sh "linux-amd64/helm upgrade --install ${appName} ./OCP/Builds --set tag=${version},namespace=sanbox-env,applicationName=${appName}"
+						//appName="${application_name}".toLowerCase()
+						//#sh "../../oc start-build ${appName} --from-dir=. --follow --wait"
+						
 				}
             }
         }
