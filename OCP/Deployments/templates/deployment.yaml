@@ -23,6 +23,7 @@ spec:
             - containerPort: {{ .Values.container.port }}
               protocol: {{  .Values.container.protocol }}
           env: []
+          imagePullPolicy: Always
       imagePullSecrets: []
   strategy:
     type: RollingUpdate
