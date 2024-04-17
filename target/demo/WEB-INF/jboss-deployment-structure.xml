@@ -1,0 +1,21 @@
+<jboss-deployment-structure
+	xmlns="urn:jboss:deployment-structure:1.2">
+	<deployment>
+		<dependencies>
+			<!-- <module name="org.jboss.ironjacamar.jdbcadapters" export="true" /> -->
+			<!-- <module name="org.keycloak"/> -->
+		</dependencies>
+		<exclusions>
+		    <module name="org.apache.commons.logging" />
+			<!--<module name="org.apache.log4j" />-->
+			<!--<module name="org.apache.logging.log4j" />-->
+			<!--<module name="org.jboss.logging" />-->
+			<!--<module name="org.jboss.logging.jul-to-slf4j-stub" />-->
+			<!--<module name="org.jboss.logmanager" />-->
+			<!--<module name="org.jboss.logmanager.log4j" />-->
+			<module name="org.slf4j" />
+			<module name="org.slf4j.impl" />
+	    </exclusions>
+	</deployment>
+</jboss-deployment-structure>
+ 
