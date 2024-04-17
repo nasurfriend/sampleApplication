@@ -89,10 +89,11 @@ spec:
 						sh "pwd && ls -ltrha "
 						appName="${application_name}".toLowerCase()
 						sh "./oc project sandbox-env"
-						sh "linux-amd64/helm upgrade --install ${appName}-deployment ./OCP/Builds --set tag=${version},namespace=jenkins,applicationName=${appName}"
-						appName="${application_name}".toLowerCase()
-						sh "./oc start-build ${appName} --from-dir=. --follow --wait"
-						
+						dir("./${appName}") {
+							appName="${application_name}".toLowerCase()
+							sh "linux-amd64/helm upgrade --install ${appName}-deployment ./OCP/Builds --set tag=${version},namespace=jenkins,applicationName=${appName}"
+							sh "./oc start-build ${appName} --from-dir=. --follow --wait"
+						}
 				}
             }
         }
