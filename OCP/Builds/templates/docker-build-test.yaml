@@ -1,0 +1,23 @@
+kind: BuildConfig
+apiVersion: build.openshift.io/v1
+metadata:
+  name: sampleBuild
+  namespace: sandbox-env
+spec:
+  output:
+    to:
+      kind: DockerImage
+      name: "{{ .Values.repository }}:{{ .Values.tag | default .Chart.AppVersion }}"
+    pushSecret:
+      name: dockerhub
+  strategy:
+    type: Docker
+    dockerStrategy:
+      noCache: true
+      env:
+        - name: dctag
+          value: vapt
+  source:
+    type: Binary
+    binary: {}
+  runPolicy: Serial
