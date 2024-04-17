@@ -89,7 +89,7 @@ spec:
 						sh "pwd && ls -ltrha "
 						appName="${application_name}".toLowerCase()
 						sh "./oc project sandbox-env"
-						dir("./${appName}") {
+						dir("./${application_name}") {
 							sh 'ls -ltr'
 							appName="${application_name}".toLowerCase()
 							sh "../linux-amd64/helm upgrade --install ${appName}-deployment ./OCP/Builds --set tag=${version},namespace=jenkins,applicationName=${appName}"
