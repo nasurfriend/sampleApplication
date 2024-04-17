@@ -1,6 +1,15 @@
+// Uses Declarative syntax to run commands inside a container.
 pipeline {
     agent {
         kubernetes {
+            // Rather than inline YAML, in a multibranch Pipeline you could use: yamlFile 'jenkins-pod.yaml'
+            // Or, to avoid YAML:
+            // containerTemplate {
+            //     name 'shell'
+            //     image 'ubuntu'
+            //     command 'sleep'
+            //     args 'infinity'
+            // }
             yaml '''
 apiVersion: v1
 kind: Pod
@@ -80,7 +89,7 @@ spec:
 						sh "pwd && ls -ltrha "
 						appName="${application_name}".toLowerCase()
 						sh "./oc project sandbox-env"
-						sh "linux-amd64/helm upgrade --install ${appName} ./OCP/Builds --set tag=${version},namespace=jenkins,applicationName=${appName}"
+						sh "linux-amd64/helm upgrade --install ${appName}-deployment ./OCP/Builds --set tag=${version},namespace=jenkins,applicationName=${appName}"
 						appName="${application_name}".toLowerCase()
 						sh "./oc start-build ${appName} --from-dir=. --follow --wait"
 						
