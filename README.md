@@ -3,6 +3,15 @@
 
 This application is a demo spring boot application that consist of GET API call returns helloworld.
 
+## Build Application:
+- Jenkins:
+  Configure the Cloud settings and set it to your k8s/Ocp.
+  Create your service account and linked it with the namespace
+  
+  
+  Create a pipeline with a scripted pipeline and pull from the repository.
+  
+
 the following is the call sequence 
 `demoapplication/applicationendpoint/helloworld`
 
