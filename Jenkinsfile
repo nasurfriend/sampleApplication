@@ -29,6 +29,9 @@ spec:
             defaultContainer 'maven'
         }
     }
+	environment{
+		application_name = 'sampleApplication'
+	}
     stages {
         stage('Test') {
             steps {
@@ -37,6 +40,8 @@ spec:
         }
         stage('Pull') {
             steps {
+				echo "application name: ${application_name}"
+				
                 sh "git clone --branch master https://github.com/nasurfriend/sampleApplication.git"
 				sh "pwd"
 			    dir('./spring-boot-hello-world') {
@@ -50,12 +55,35 @@ spec:
         }
         stage('Build') {
             steps {
+				echo "application name: ${application_name}"
+				
 			    dir('./sampleApplication') {
                    sh """
                        mvn clean install
                        
                    """
                 }
+            }
+        }
+		stage('Dockerised') {
+            steps {
+			    echo "application name: ${application_name}"
+				
+				script {
+					dir("./sampleApplication") {
+						version = sh( script: "mvn org.apache.maven.plugins:maven-help-plugin:2.1.1:evaluate -Dexpression=project.version | sed -n -e '/^\\[.*\\]/ !{ /^[0-9]/ { p; q } }'", returnStdout:true ).trim()
+						imgver = version
+					}
+						echo "Image Ver: ${imgver}"
+						sh "pwd && ls -ltrha "
+						appName="${application_name}".toLowerCase()
+						sh "./oc project jenkins-ephimeral"
+						sh "linux-amd64/helm upgrade --install ${appName} ./helmchart --set tag=${version},namespace=jenkins-ephimeral,applicationName=${appName}"
+						dir("./sampleApplication") {
+							appName="${application_name}".toLowerCase()
+							sh "../../oc start-build ${appName} --from-dir=. --follow --wait"
+						}
+				}
             }
         }
     }
