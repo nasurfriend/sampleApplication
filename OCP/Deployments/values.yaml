@@ -1,6 +1,6 @@
 app:
   name: demo
-  namespace: sandbox-env
+  namespace: sandbox-deployment
   replicas: 3
 container:
   image: image-registry.openshift-image-registry.svc:5000/sandbox-env/demo:0.0.1-SNAPSHOT
