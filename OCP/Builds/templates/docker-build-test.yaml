@@ -8,8 +8,6 @@ spec:
     to:
       kind: DockerImage
       name: "{{ .Values.repository }}:{{ .Values.tag | default .Chart.AppVersion }}"
-    pushSecret:
-      name: dockerhub
   strategy:
     type: Docker
     dockerStrategy:
