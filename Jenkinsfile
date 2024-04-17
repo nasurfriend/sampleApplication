@@ -89,8 +89,8 @@ spec:
 						appName="${application_name}".toLowerCase()
 						sh "./oc project sandbox-env"
 						sh "linux-amd64/helm upgrade --install ${appName} ./OCP/Builds --set tag=${version},namespace=sanbox-env,applicationName=${appName}"
-						//appName="${application_name}".toLowerCase()
-						//#sh "../../oc start-build ${appName} --from-dir=. --follow --wait"
+						appName="${application_name}".toLowerCase()
+						sh "./oc start-build ${appName} --from-dir=. --follow --wait"
 						
 				}
             }
