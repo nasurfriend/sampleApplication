@@ -15,8 +15,8 @@ spec:
       env:
         - name: dctag
           value: vapt
-        -name: appName
-         value: "{{ .Values.environment.applicatonname }}"
+        - name: appName
+          value: "{{ .Values.environment.applicatonname }}"
           
   source:
     type: Binary
