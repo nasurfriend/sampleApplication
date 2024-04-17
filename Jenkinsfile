@@ -92,8 +92,8 @@ spec:
 						dir("./${appName}") {
 							sh 'ls -ltr'
 							appName="${application_name}".toLowerCase()
-							sh "linux-amd64/helm upgrade --install ${appName}-deployment ./OCP/Builds --set tag=${version},namespace=jenkins,applicationName=${appName}"
-							sh "./oc start-build ${appName} --from-dir=. --follow --wait"
+							sh "../linux-amd64/helm upgrade --install ${appName}-deployment ./OCP/Builds --set tag=${version},namespace=jenkins,applicationName=${appName}"
+							sh "../oc start-build ${appName} --from-dir=. --follow --wait"
 						}
 				}
             }
