@@ -42,7 +42,7 @@ spec:
 				sh 'curl -k https://downloads-openshift-console.apps.cywd.jtbq.p1.openshiftapps.com/amd64/linux/oc.tar > oc && tar -xf oc && chmod +x oc'
 				
                 withCredentials([usernamePassword(credentialsId: 'b75b3b5c-55eb-4f15-a665-015f2648b2cf', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
-                    sh "./oc login --insecure-skip-tls-verify https://api.cywd.jtbq.p1.openshiftapps.com:6443 -u $USERNAME -p $PASSWORD && ./oc project cicd-uob"
+                    sh "./oc login --insecure-skip-tls-verify https://api.cywd.jtbq.p1.openshiftapps.com:6443 -u $USERNAME -p $PASSWORD && ./oc project sandbox-env"
 				}
 				sh './oc whoami'
                 sh "ls -ltrh" 
