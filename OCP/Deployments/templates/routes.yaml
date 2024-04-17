@@ -1,0 +1,17 @@
+kind: Route
+apiVersion: route.openshift.io/v1
+metadata:
+  name: {{ .Values.routes.app }}
+  namespace: sandbox-deployment
+  labels:
+    app.kubernetes.io/managed-by: Helm
+spec:
+  to:
+    kind: Service
+    name: {{ .Values.routes.servicename }}
+  tls:
+    termination: {{ .Values.routes.tlstermination }}
+    insecureEdgeTerminationPolicy:  {{ .Values.routes.insecureEdgeTerminationPolicy }}
+    destinationCACertificate: ''
+  port:
+    targetPort: {{ .Values.routes.targetport }}
