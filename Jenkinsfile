@@ -63,7 +63,7 @@ spec:
                 }
             }
         }
-        stage('Build') {
+        /*stage('Build') {
             steps {
 				echo "application name: ${application_name}"
 				
@@ -74,7 +74,7 @@ spec:
                    """
                 }
             }
-        }
+        }*/
 	stage('Dockerised') {
             steps {
 			    echo "application name: ${application_name}"
