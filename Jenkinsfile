@@ -1,15 +1,6 @@
-// Uses Declarative syntax to run commands inside a container.
 pipeline {
     agent {
         kubernetes {
-            // Rather than inline YAML, in a multibranch Pipeline you could use: yamlFile 'jenkins-pod.yaml'
-            // Or, to avoid YAML:
-            // containerTemplate {
-            //     name 'shell'
-            //     image 'ubuntu'
-            //     command 'sleep'
-            //     args 'infinity'
-            // }
             yaml '''
 apiVersion: v1
 kind: Pod
@@ -30,7 +21,7 @@ spec:
         }
     }
 	environment{
-		application_name = 'sampleApplication'
+		application_name = "${application}"
 		ocp_environment= 'sandbox-env'
 	}
     stages {
@@ -55,7 +46,8 @@ spec:
 				
                 sh "git clone --branch master https://github.com/nasurfriend/sampleApplication.git"
 				sh "pwd"
-			    dir('./OCP/Builds') {
+				sh "ls -ltr"
+			    dir('./sampleApplication') {
                    sh """
                        pwd
                        ls -ltr
@@ -64,39 +56,17 @@ spec:
                 }
             }
         }
-        stage('Build') {
-            steps {
-				echo "application name: ${application_name}"
-				
-			    dir('./sampleApplication') {
-                   sh """
-                       mvn clean install
-                       
-                   """
-                }
-            }
-        }
-		stage('Dockerised') {
-            steps {
-			    echo "application name: ${application_name}"
-				
+		stage('Deployment') {
+			steps {
 				script {
-					
-						version = sh( script: "mvn org.apache.maven.plugins:maven-help-plugin:2.1.1:evaluate -Dexpression=project.version | sed -n -e '/^\\[.*\\]/ !{ /^[0-9]/ { p; q } }'", returnStdout:true ).trim()
-						imgver = version
-					
-						echo "Image Ver: ${imgver}"
-						sh "pwd && ls -ltrha "
-						appName="${application_name}".toLowerCase()
-						sh "./oc project sandbox-env"
-						dir("./${application_name}") {
-							sh 'ls -ltr'
-							appName="${application_name}".toLowerCase()
-							sh "../linux-amd64/helm upgrade --install ${appName}-deployment ./OCP/Builds --set tag=${version},namespace=jenkins,applicationName=${appName}"
-							sh "../oc start-build ${appName} --from-dir=. --follow --wait"
-						}
+					echo "application name: ${application_name}"
+					sh "./oc project sandbox-deployment"
+					dir("./${application_name}") {
+						appName="${application}".toLowerCase()
+						sh "../linux-amd64/helm upgrade --install ${appName}-deployment ./OCP/Deployments --set tag=${version},namespace=sandbox-deployment,applicationName=${appName}"
+					}
 				}
-            }
-        }
+			}
+		}
     }
 }
