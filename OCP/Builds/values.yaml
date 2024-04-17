@@ -1,2 +1,4 @@
 repository: image-registry.openshift-image-registry.svc:5000/sandbox-env/demo
 tag:
+environment:
+  applicatonname: sampleapplicaton

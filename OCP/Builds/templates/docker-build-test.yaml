@@ -18,4 +18,8 @@ spec:
   source:
     type: Binary
     binary: {}
+    sourceStratergy:
+      env:
+        -name: appName
+        -value: "{{ .Values.environment.applicatonname }}"
   runPolicy: Serial
