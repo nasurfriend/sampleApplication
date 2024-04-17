@@ -1,5 +1,5 @@
 app:
-  name: sampleapplication
+  name: demo
   namespace: sandbox-env
   replicas: 3
 container:
