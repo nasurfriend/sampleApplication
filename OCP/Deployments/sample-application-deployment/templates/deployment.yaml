@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: {{ .Values.app.namespace }}
+  name: {{ .Values.app.name }}
+  annotations:
+    image.openshift.io/triggers: >-
+      [{"from":{"kind":"ImageStreamTag","name":"demo:0.0.1-SNAPSHOT","namespace":"sandbox-env"},"fieldPath":"spec.template.spec.containers[?(@.name==\"container\")].image","pause":"false"}]
+spec:
+  selector:
+    matchLabels:
+      app: {{ .Values.app.name }}
+  replicas: {{ .Values.app.replicas }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.app.name }}
+    spec:
+      containers:
+        - name: container
+          image: {{  .Values.container.image }}
+          ports:
+            - containerPort: {{ .Values.container.port }}
+              protocol: {{  .Values.container.protocol }}
+          env: []
+      imagePullSecrets: []
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: {{ Values.container.maxSurge }}
+      maxUnavailable: {{  .Values.container.maxUnavailable }}
+  paused: false

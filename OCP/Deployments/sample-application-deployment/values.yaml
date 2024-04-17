@@ -1,0 +1,13 @@
+app:
+  name: sampleapplication
+  namespace: sandbox-env
+  replicas: 3
+container:
+  image: image-registry.openshift-image-registry.svc:5000/sandbox-env/demo:0.0.1-SNAPSHOT
+  port: 8080
+  protocol: TCP
+  maxSurge: 25%
+  maxUnavailable: 25%
+service:
+  port: 8080
+  targetPort: 8080
