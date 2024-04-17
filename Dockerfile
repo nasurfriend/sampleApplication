@@ -1,6 +1,6 @@
 FROM openjdk:12-alpine
 
-ARG appName=$appName
+ENV appName=$appName
 ARG JAR_FILE=${appName}/target/*.war
 COPY ${JAR_FILE} /opt/sample/app.war
 
