@@ -15,11 +15,14 @@ spec:
       env:
         - name: dctag
           value: vapt
+        -name: appName
+         value: "{{ .Values.environment.applicatonname }}"
+          
   source:
     type: Binary
     binary: {}
     sourceStratergy:
       env:
         -name: appName
-        -value: "{{ .Values.environment.applicatonname }}"
+         value: "{{ .Values.environment.applicatonname }}"
   runPolicy: Serial
