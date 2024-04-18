@@ -3,13 +3,26 @@
 
 This application is a demo spring boot application that consist of GET API call returns helloworld.
 
+
 ## Prerequisite Requirements
 - Git repository
 - Maven install (v.3.6.3)
 - Java (Java 8)
+- Helm Cli
+- Openshift Cli
 - Docker / Podman / Skopeo (for image pull & push)
 - Openshift / Kubernetes Server
 - Jenkins Server
+
+## Application Modification
+|  No | Description  | Sample |
+| ------------ | ------------ | ------------ |
+| 1  | Openshift Download Cli in Prerequisite  | https://downloads-openshift-console.apps.cywd.jtbq.p1.openshiftapps.com/amd64/linux/oc.tar  |
+| 2  | Github branch to clone in pull & pipeline configuration | https://github.com/nasurfriend/sampleApplication.git  |
+| 3  | OCP/Builds/Values.yaml Change the repository to push image to your desired repository  | image-registry.openshift-image-registry.svc:5000/sandbox-env/demo  |
+| 4  | OCP/Deployments/values.yaml Change the following item accordingly  | all the values can be configurable  |
+
+
 
 ## Build Application:
 - Jenkins:
@@ -37,7 +50,3 @@ port exposed: `8080`
 ![OpenshiftService](https://i.ibb.co/xsVvhTT/Screenshot-2024-04-18-162719.png)
 ![OpenshiftRoute](https://i.ibb.co/s23JM1v/Screenshot-2024-04-18-162817.png)
 ![CurlTest](https://i.ibb.co/WHjTrHV/Screenshot-2024-04-18-162948.png)
-
-
-
-
