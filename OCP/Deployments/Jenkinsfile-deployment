@@ -76,7 +76,7 @@ spec:
                 }
             }
         }
-		stage('Dockerised') {
+		stage('Deployment') {
             steps {
 			    echo "application name: ${application_name}"
 				
