@@ -26,12 +26,14 @@ the following is the call sequence
 port exposed: `8080`
 
 ## Build Sample
-Create 2 pipelines consists of CI and CD
 ![Jenkins](https://i.ibb.co/1KDY0YR/Screenshot-2024-04-18-160429.png)
 ![Jenkins Build Pipeline](https://i.ibb.co/WGgPCfM/Screenshot-2024-04-18-161737.png)
 ![Openshift Image Stream](https://i.ibb.co/VvNNkJc/Screenshot-2024-04-18-162002.png)
 
-
-
-
-
+## Deployment Sample
+![Jenkins](https://i.ibb.co/xssW1zZ/Screenshot-2024-04-18-162415.png)
+![JenkinsParameter](https://i.ibb.co/Cht3DKj/Screenshot-2024-04-18-162514.png)
+![OpenshiftDeployment](https://i.ibb.co/N6RK8Xr/Screenshot-2024-04-18-162623.png)
+![OpenshiftService](https://i.ibb.co/xsVvhTT/Screenshot-2024-04-18-162719.png)
+![OpenshiftRoute](https://i.ibb.co/s23JM1v/Screenshot-2024-04-18-162817.png)
+![CurlTest](https://i.ibb.co/WHjTrHV/Screenshot-2024-04-18-162948.png)
