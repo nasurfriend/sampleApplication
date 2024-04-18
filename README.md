@@ -3,6 +3,14 @@
 
 This application is a demo spring boot application that consist of GET API call returns helloworld.
 
+## Prerequisite Requirements
+- Git repository
+- Maven install (v.3.6.3)
+- Java (Java 8)
+- Docker / Podman / Skopeo (for image pull & push)
+- Openshift / Kubernetes Server
+- Jenkins Server
+
 ## Build Application:
 - Jenkins:
   Configure the Cloud settings and set it to your k8s/Ocp.
@@ -16,4 +24,14 @@ the following is the call sequence
 `demoapplication/applicationendpoint/helloworld`
 
 port exposed: `8080`
+
+## Build Sample
+Create 2 pipelines consists of CI and CD
+![Jenkins](https://i.ibb.co/1KDY0YR/Screenshot-2024-04-18-160429.png)
+![Jenkins Build Pipeline](https://i.ibb.co/WGgPCfM/Screenshot-2024-04-18-161737.png)
+![Openshift Image Stream](https://i.ibb.co/VvNNkJc/Screenshot-2024-04-18-162002.png)
+
+
+
+
 
