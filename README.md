@@ -32,8 +32,12 @@ port exposed: `8080`
 
 ## Deployment Sample
 ![Jenkins](https://i.ibb.co/xssW1zZ/Screenshot-2024-04-18-162415.png)
-![JenkinsParameter](https://i.ibb.co/Cht3DKj/Screenshot-2024-04-18-162514.png)
+![JenkinsParameter](https://i.ibb.co/Ct2mV58/Screenshot-2024-04-18-163213.png)
 ![OpenshiftDeployment](https://i.ibb.co/N6RK8Xr/Screenshot-2024-04-18-162623.png)
 ![OpenshiftService](https://i.ibb.co/xsVvhTT/Screenshot-2024-04-18-162719.png)
 ![OpenshiftRoute](https://i.ibb.co/s23JM1v/Screenshot-2024-04-18-162817.png)
 ![CurlTest](https://i.ibb.co/WHjTrHV/Screenshot-2024-04-18-162948.png)
+
+
+
+
